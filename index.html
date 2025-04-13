@@ -1,59 +1,71 @@
-<script>
-  (function() {
-    // Settings configuration
-    var ANSWERING_AGENT_ID = "YOUR_ID";
-    window.answeringAgentSettings = {
-      id: ANSWERING_AGENT_ID,
-      apiUrl: "https://answering-agent-embed-dashboard-ubsydq.laravel.cloud/api",
-      // other config options
-    };
-    
-    // Create container if not exists
-    if (!document.getElementById('answering-agent-dashboard')) {
-      var container = document.createElement('div');
-      container.id = 'answering-agent-dashboard';
-      document.body.appendChild(container);
-    }
-    
-    // Feature detection for ESM support
-    var supportsESM = 'noModule' in document.createElement('script');
-    var baseUrl = "https://answering-agent-embed-dashboard-ubsydq.laravel.cloud";
-    
-    // Load CSS
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = baseUrl + '/embed.css';
-    document.head.appendChild(link);
-    
-    if (supportsESM) {
-      // Modern browser - load directly
-      var script = document.createElement('script');
-      script.type = 'module';
-      script.src = baseUrl + '/embed-esm.js'; 
-      document.head.appendChild(script);
-    } else {
-      // Legacy browser - load React dependencies first
-      loadScript('https://unpkg.com/react@18/umd/react.production.min.js')
-        .then(function() {
-          return loadScript('https://unpkg.com/react-dom@18/umd/react-dom.production.min.js');
-        })
-        .then(function() {
-          return loadScript(baseUrl + '/embed-legacy.js');
-        })
-        .catch(function(error) {
-          console.error('Failed to load Answering Agent dashboard:', error);
-        });
-    }
-    
-    // Helper to load a script and return a promise
-    function loadScript(src) {
-      return new Promise(function(resolve, reject) {
-        var script = document.createElement('script');
-        script.src = src;
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
-    }
-  })();
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    hi im an app
+    <script>
+        (function() {
+          // Settings configuration
+          var ANSWERING_AGENT_ID = "YOUR_ID";
+          window.answeringAgentSettings = {
+            id: ANSWERING_AGENT_ID,
+            apiUrl: "https://answering-agent-embed-dashboard-ubsydq.laravel.cloud/api",
+            // other config options
+          };
+          
+          // Create container if not exists
+          if (!document.getElementById('answering-agent-dashboard')) {
+            var container = document.createElement('div');
+            container.id = 'answering-agent-dashboard';
+            document.body.appendChild(container);
+          }
+          
+          // Feature detection for ESM support
+          var supportsESM = 'noModule' in document.createElement('script');
+          var baseUrl = "https://answering-agent-embed-dashboard-ubsydq.laravel.cloud";
+          
+          // Load CSS
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = baseUrl + '/embed.css';
+          document.head.appendChild(link);
+          
+          if (supportsESM) {
+            // Modern browser - load directly
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = baseUrl + '/embed-esm.js'; 
+            document.head.appendChild(script);
+          } else {
+            // Legacy browser - load React dependencies first
+            loadScript('https://unpkg.com/react@18/umd/react.production.min.js')
+              .then(function() {
+                return loadScript('https://unpkg.com/react-dom@18/umd/react-dom.production.min.js');
+              })
+              .then(function() {
+                return loadScript(baseUrl + '/embed-legacy.js');
+              })
+              .catch(function(error) {
+                console.error('Failed to load Answering Agent dashboard:', error);
+              });
+          }
+          
+          // Helper to load a script and return a promise
+          function loadScript(src) {
+            return new Promise(function(resolve, reject) {
+              var script = document.createElement('script');
+              script.src = src;
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
+            });
+          }
+        })();
+      </script>
+      
+</body>
+</html>
