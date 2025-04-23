@@ -8,66 +8,17 @@
 <body>
     hi im an app
 
-    <div id="answering-agent-dashboard"></div>
-    
+    <div id="answering-agent-dashboard" data-id="YOUR_ID" data-user-id="OPTIONAL_USER_ID"></div>
     <script>
-        (function() {
-          // Settings configuration
-          var ANSWERING_AGENT_ID = "YOUR_ID";
-          window.answeringAgentSettings = {
-            token: 'YOUR_AUTH_TOKEN_HERE', // Authentication token for the user,
-            id: ANSWERING_AGENT_ID
-            // other config options
-          };
-          
-          // Create container if not exists
-          if (!document.getElementById('answering-agent-dashboard')) {
-            var container = document.createElement('div');
-            container.id = 'answering-agent-dashboard';
-            document.body.appendChild(container);
-          }
-          
-          // Feature detection for ESM support
-          var supportsESM = 'noModule' in document.createElement('script');
-          
-          // Load CSS
-          var link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = 'https://answering-agent-embed-dashboard-ubsydq.laravel.cloud/embed.css';
-          document.head.appendChild(link);
-          
-          if (supportsESM) {
-            // Modern browser - load directly
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = 'https://answering-agent-embed-dashboard-ubsydq.laravel.cloud/embed-esm.js'; 
-            document.head.appendChild(script);
-          } else {
-            // Legacy browser - load React dependencies first
-            loadScript('https://unpkg.com/react@18/umd/react.production.min.js')
-              .then(function() {
-                return loadScript('https://unpkg.com/react-dom@18/umd/react-dom.production.min.js');
-              })
-              .then(function() {
-                return loadScript('https://answering-agent-embed-dashboard-ubsydq.laravel.cloud/embed-legacy.js');
-              })
-              .catch(function(error) {
-                console.error('Failed to load Answering Agent dashboard:', error);
-              });
-          }
-          
-          // Helper to load a script and return a promise
-          function loadScript(src) {
-            return new Promise(function(resolve, reject) {
-              var script = document.createElement('script');
-              script.src = src;
-              script.onload = resolve;
-              script.onerror = reject;
-              document.head.appendChild(script);
-            });
-          }
-        })();
-      </script>
+      window.answeringAgentSettings = {
+        id: "YOUR_ID", // Required if not using data-id attribute
+        apiUrl: "https://api.answeringagent.com", // Optional: Override default API URL
+        theme: "light", // Optional: Set theme preference
+        height: "600px", // Optional: Set iframe height
+      };
+    </script>
+    
+    <script src="https://answering-agent-embed-dashboard-ubsydq.laravel.cloud/embed.js" async></script>
       
 </body>
 </html>
